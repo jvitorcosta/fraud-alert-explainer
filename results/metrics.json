@@ -1,0 +1,128 @@
+{
+  "split": {
+    "train": {
+      "rows": 1097693,
+      "fraud": 6343,
+      "start": "2019-01-01 00:00:18",
+      "end": "2020-03-31 23:59:55",
+      "days": 455.0
+    },
+    "valid": {
+      "rows": 229040,
+      "fraud": 1296,
+      "start": "2020-04-01 00:03:39",
+      "end": "2020-06-30 23:59:50",
+      "days": 91.0
+    },
+    "test": {
+      "rows": 525661,
+      "fraud": 2012,
+      "start": "2020-07-01 00:00:08",
+      "end": "2020-12-31 23:59:34",
+      "days": 184.0
+    }
+  },
+  "lightgbm_best_iteration": 334,
+  "models": {
+    "LightGBM": {
+      "valid": {
+        "pr_auc": 0.9849871644127638,
+        "roc_auc": 0.9997978460383069,
+        "fraud_rate": 0.005658400279427174,
+        "n_rows": 229040,
+        "n_fraud": 1296
+      },
+      "test": {
+        "pr_auc": 0.9725960290340007,
+        "roc_auc": 0.9994203183777888,
+        "fraud_rate": 0.0038275618697221213,
+        "n_rows": 525661,
+        "n_fraud": 2012
+      },
+      "operating_points": [
+        {
+          "budget_per_day": 10,
+          "threshold": 0.9903496851604177,
+          "alerts_per_day": 7.043478260869565,
+          "precision": 0.9992283950617284,
+          "recall": 0.6436381709741551,
+          "amount_recall": 0.7352218327488874
+        },
+        {
+          "budget_per_day": 25,
+          "threshold": 0.0042646279025110295,
+          "alerts_per_day": 22.467391304347824,
+          "precision": 0.4784712143202709,
+          "recall": 0.9831013916500994,
+          "amount_recall": 0.993710502738197
+        },
+        {
+          "budget_per_day": 50,
+          "threshold": 0.0005968687973324152,
+          "alerts_per_day": 49.59239130434783,
+          "precision": 0.21873972602739725,
+          "recall": 0.9920477137176938,
+          "amount_recall": 0.9989647655687859
+        },
+        {
+          "budget_per_day": 100,
+          "threshold": 0.00015593270788578887,
+          "alerts_per_day": 104.53804347826087,
+          "precision": 0.10428905640759033,
+          "recall": 0.9970178926441352,
+          "amount_recall": 0.9998568369078904
+        }
+      ]
+    },
+    "Logistic regression": {
+      "valid": {
+        "pr_auc": 0.4331828795988734,
+        "roc_auc": 0.9477506664402915,
+        "fraud_rate": 0.005658400279427174,
+        "n_rows": 229040,
+        "n_fraud": 1296
+      },
+      "test": {
+        "pr_auc": 0.32689465576892546,
+        "roc_auc": 0.9337770595556272,
+        "fraud_rate": 0.0038275618697221213,
+        "n_rows": 525661,
+        "n_fraud": 2012
+      },
+      "operating_points": [
+        {
+          "budget_per_day": 10,
+          "threshold": 0.15400824825096665,
+          "alerts_per_day": 9.641304347826088,
+          "precision": 0.4954904171364149,
+          "recall": 0.43687872763419483,
+          "amount_recall": 0.6040620452011803
+        },
+        {
+          "budget_per_day": 25,
+          "threshold": 0.038324309868582686,
+          "alerts_per_day": 25.293478260869566,
+          "precision": 0.2739578856897293,
+          "recall": 0.6336978131212724,
+          "amount_recall": 0.8015585494926063
+        },
+        {
+          "budget_per_day": 50,
+          "threshold": 0.02145543478843698,
+          "alerts_per_day": 51.17391304347826,
+          "precision": 0.14910790144435004,
+          "recall": 0.6978131212723658,
+          "amount_recall": 0.8489092516648393
+        },
+        {
+          "budget_per_day": 100,
+          "threshold": 0.01397614176728211,
+          "alerts_per_day": 105.17934782608695,
+          "precision": 0.07812742210509999,
+          "recall": 0.7514910536779325,
+          "amount_recall": 0.8828641108589479
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1214 @@
+{
+  "summary": {
+    "model": "qwen2.5:1.5b",
+    "n": 40,
+    "grounded_rate": 0.65,
+    "off_list_rate": 0.2,
+    "invented_number_rate": 0.125,
+    "mean_coverage": 0.8375,
+    "latency_p50_s": 1.2846087500220165
+  },
+  "alerts": [
+    {
+      "ts": "2020-07-07 22:30:10",
+      "is_fraud": 0,
+      "score": 0.0018,
+      "facts": [
+        "model fraud probability: 0.2%",
+        "card spend in the previous 24 hours: $780.59",
+        "hour of day: 22:00 (10 PM)",
+        "card transactions in the previous 24 hours: 2",
+        "merchant category: personal care"
+      ],
+      "given": [
+        "amt_prev_24h",
+        "hour",
+        "txns_prev_24h",
+        "category"
+      ],
+      "explanation": "The transaction was flagged due to the unusually high value of $780.59 spent in the previous 24 hours, the time of day at 22:00 (10 PM), the frequent card transactions in the past 24 hours, and the merchant category of personal care.",
+      "grounded": false,
+      "cited": [
+        "amt",
+        "amt_prev_24h",
+        "category",
+        "hour",
+        "txns_prev_24h"
+      ],
+      "off_list": [
+        "amt"
+      ],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 0.959
+    },
+    {
+      "ts": "2020-07-11 23:57:24",
+      "is_fraud": 1,
+      "score": 1.0,
+      "facts": [
+        "model fraud probability: 100.0%",
+        "transaction amount: $882.13",
+        "card spend in the previous 24 hours: $4,557.10",
+        "hour of day: 23:00 (11 PM)",
+        "card transactions in the previous hour: 3"
+      ],
+      "given": [
+        "amt",
+        "amt_prev_24h",
+        "hour",
+        "txns_prev_1h"
+      ],
+      "explanation": "The transaction amount of $882.13 is significantly higher than the card's average spend of $4,557.10 in the previous 24 hours, indicating unusual spending behavior. The hour of day at 23:00 (11 PM) is typically associated with higher spending, suggesting a potential for fraud. Additionally, the card has made 3 transactions in the previous hour, which could indicate a pattern of repeated attempts to fraudulently use the card.",
+      "grounded": false,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "hour",
+        "txns_prev_1h"
+      ],
+      "off_list": [
+        "amt_vs_card_avg"
+      ],
+      "unsupported_numbers": [],
+      "coverage": 0.75,
+      "latency_s": 1.398
+    },
+    {
+      "ts": "2020-07-17 13:22:12",
+      "is_fraud": 0,
+      "score": 0.0013,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "card spend in the previous 24 hours: $1,359.82",
+        "cardholder age: 52 years",
+        "transaction amount: $50.67",
+        "card transactions in the previous 24 hours: 5"
+      ],
+      "given": [
+        "amt_prev_24h",
+        "age",
+        "amt",
+        "txns_prev_24h"
+      ],
+      "explanation": "The transaction was flagged due to the unusually high amount ($50.67) compared to the cardholder's typical spending habits, the cardholder's age (52 years), and the fact that the card has been used 5 times in the past 24 hours.",
+      "grounded": false,
+      "cited": [
+        "age",
+        "amt",
+        "amt_vs_card_avg"
+      ],
+      "off_list": [
+        "amt_vs_card_avg"
+      ],
+      "unsupported_numbers": [],
+      "coverage": 0.5,
+      "latency_s": 0.863
+    },
+    {
+      "ts": "2020-07-20 22:05:16",
+      "is_fraud": 0,
+      "score": 0.0009,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "hour of day: 22:00 (10 PM)",
+        "card spend in the previous 24 hours: $758.18",
+        "card transactions in the previous 24 hours: 4",
+        "population of the cardholder's city: 100"
+      ],
+      "given": [
+        "hour",
+        "amt_prev_24h",
+        "txns_prev_24h",
+        "city_pop"
+      ],
+      "explanation": "The transaction was flagged due to the high value spent ($758.18) in the hour of day (22:00, 10 PM), indicating unusual activity outside of normal business hours. Additionally, the cardholder has made 4 transactions in the past 24 hours, which suggests a pattern of frequent and potentially unauthorized spending. The low population of the cardholder's city (100) might indicate a lower risk of fraud in that area, but the combination of high spending and frequent activity still raises suspicion.",
+      "grounded": true,
+      "cited": [
+        "city_pop",
+        "hour",
+        "txns_prev_24h"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.75,
+      "latency_s": 1.465
+    },
+    {
+      "ts": "2020-07-21 14:22:20",
+      "is_fraud": 0,
+      "score": 0.0029,
+      "facts": [
+        "model fraud probability: 0.3%",
+        "merchant category: dining",
+        "card spend in the previous 24 hours: $770.71",
+        "transaction amount: $96.94",
+        "minutes since the card's previous transaction: 711.6 minutes"
+      ],
+      "given": [
+        "category",
+        "amt_prev_24h",
+        "amt",
+        "mins_since_prev_txn"
+      ],
+      "explanation": "The transaction was flagged due to the unusually low value ($96.94) compared to the previous day's spend ($770.71), indicating a significant drop in spending. Additionally, the card was inactive for 711.6 minutes, suggesting the cardholder may have been absent or inactive, which could indicate a potential fraud risk. The high model fraud probability of 0.3% further supports the flagging.",
+      "grounded": false,
+      "cited": [],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.0,
+      "latency_s": 1.246
+    },
+    {
+      "ts": "2020-07-22 23:10:47",
+      "is_fraud": 0,
+      "score": 0.0323,
+      "facts": [
+        "model fraud probability: 3.2%",
+        "transaction amount: $21.45",
+        "hour of day: 23:00 (11 PM)",
+        "merchant category: personal care",
+        "minutes since the card's previous transaction: 1,740.1 minutes"
+      ],
+      "given": [
+        "amt",
+        "hour",
+        "category",
+        "mins_since_prev_txn"
+      ],
+      "explanation": "The transaction amount of $21.45 is unusually low, suggesting potential fraud. The hour of day at 23:00 (11 PM) is highly unusual for a transaction, indicating a possible time-based anomaly. The merchant category of personal care is also unusual for this time and location, further raising suspicion. Additionally, the minutes since the card's previous transaction of 1,740.1 minutes is significantly higher than normal, which could indicate a potential fraud attempt.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "category",
+        "hour",
+        "mins_since_prev_txn"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.431
+    },
+    {
+      "ts": "2020-07-27 08:28:21",
+      "is_fraud": 0,
+      "score": 0.002,
+      "facts": [
+        "model fraud probability: 0.2%",
+        "transaction amount: $11.18",
+        "merchant category: online grocery",
+        "hour of day: 08:00 (8 AM)",
+        "amount compared with this card's average: 0.2x"
+      ],
+      "given": [
+        "amt",
+        "category",
+        "hour",
+        "amt_vs_card_avg"
+      ],
+      "explanation": "The transaction amount of $11.18 is significantly lower than the cardholder's usual spending, indicating potential fraud. The merchant category of online grocery suggests a higher likelihood of fraud, as online grocery transactions are often targeted for scams. The hour of day at 08:00 (8 AM) is unusual for this cardholder, suggesting a possible fraud attempt. Additionally, the amount is 0.2x of the card's average spending, indicating a potential fraud attempt.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "category",
+        "hour"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.397
+    },
+    {
+      "ts": "2020-07-27 16:14:35",
+      "is_fraud": 0,
+      "score": 0.0009,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "transaction amount: $923.89",
+        "amount compared with this card's average: 16.0x"
+      ],
+      "given": [
+        "amt",
+        "amt_vs_card_avg"
+      ],
+      "explanation": "The transaction amount of $923.89 is significantly higher than the average transaction amount for this card, which is 16.0 times higher. This indicates a potential for fraud, as the transaction is unusually large compared to the card's usual activity.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 0.745
+    },
+    {
+      "ts": "2020-07-31 04:36:29",
+      "is_fraud": 0,
+      "score": 0.0009,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "transaction amount: $1,165.74",
+        "amount compared with this card's average: 16.7x",
+        "card transactions in the previous 24 hours: 2",
+        "distance from the cardholder's home to the merchant: 27 km"
+      ],
+      "given": [
+        "amt",
+        "amt_vs_card_avg",
+        "txns_prev_24h",
+        "distance_km"
+      ],
+      "explanation": "The transaction amount of $1,165.74 is significantly higher than the card's average transaction amount, which is 16.7 times higher. Additionally, the card has been used 2 times in the past 24 hours, indicating a pattern of frequent transactions. The distance from the cardholder's home to the merchant is 27 kilometers, suggesting a potentially unfamiliar location for the transaction. These factors combined with the unusually high transaction amount likely triggered the card-fraud alert.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "distance_km"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.75,
+      "latency_s": 1.637
+    },
+    {
+      "ts": "2020-07-31 22:09:28",
+      "is_fraud": 0,
+      "score": 0.0006,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "transaction amount: $22.32",
+        "hour of day: 22:00 (10 PM)",
+        "merchant category: kids and pets",
+        "amount compared with this card's average: 0.2x"
+      ],
+      "given": [
+        "amt",
+        "hour",
+        "category",
+        "amt_vs_card_avg"
+      ],
+      "explanation": "The transaction amount of $22.32 is significantly lower than the card's average, which is 0.2x. The hour of day at 22:00 (10 PM) is unusual, as it is typically associated with late-night activities. The merchant category of kids and pets suggests a higher likelihood of fraud, as these categories are often associated with scams or unauthorized transactions.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "category",
+        "hour"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.127
+    },
+    {
+      "ts": "2020-08-02 23:40:33",
+      "is_fraud": 0,
+      "score": 0.0016,
+      "facts": [
+        "model fraud probability: 0.2%",
+        "card spend in the previous 24 hours: $5,051.52",
+        "hour of day: 23:00 (11 PM)",
+        "amount compared with this card's average: 0.2x",
+        "population of the cardholder's city: 7,430"
+      ],
+      "given": [
+        "amt_prev_24h",
+        "hour",
+        "amt_vs_card_avg",
+        "city_pop"
+      ],
+      "explanation": "The transaction was flagged due to the unusually high amount spent ($5,051.52) in the previous 24 hours, which is 0.2 times the average spending of the card. Additionally, the transaction occurred at 11 PM, which is not a typical time for large purchases, and the population of the cardholder's city is relatively small (7,430), suggesting a higher likelihood of fraud.",
+      "grounded": true,
+      "cited": [
+        "amt_vs_card_avg",
+        "city_pop",
+        "hour"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.75,
+      "latency_s": 1.24
+    },
+    {
+      "ts": "2020-08-06 10:37:58",
+      "is_fraud": 0,
+      "score": 0.0018,
+      "facts": [
+        "model fraud probability: 0.2%",
+        "transaction amount: $876.93",
+        "amount compared with this card's average: 14.6x",
+        "card transactions in the previous 24 hours: 2",
+        "distance from the cardholder's home to the merchant: 34 km"
+      ],
+      "given": [
+        "amt",
+        "amt_vs_card_avg",
+        "txns_prev_24h",
+        "distance_km"
+      ],
+      "explanation": "The transaction amount of $876.93 is significantly higher than the card's average transaction amount of $6.25, indicating a potential for fraud. Additionally, the card has been used 2 times in the past 24 hours, which suggests a pattern of frequent transactions, often associated with fraud. The distance from the cardholder's home to the merchant is 34 km, which is a considerable distance, potentially indicating a high-risk location for fraud.",
+      "grounded": false,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "distance_km"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [
+        6.25
+      ],
+      "coverage": 0.75,
+      "latency_s": 1.304
+    },
+    {
+      "ts": "2020-08-07 23:16:03",
+      "is_fraud": 0,
+      "score": 0.0007,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "hour of day: 23:00 (11 PM)",
+        "amount compared with this card's average: 0.0x",
+        "merchant category: travel",
+        "minutes since the card's previous transaction: 10.1 minutes"
+      ],
+      "given": [
+        "hour",
+        "amt_vs_card_avg",
+        "category",
+        "mins_since_prev_txn"
+      ],
+      "explanation": "The transaction was flagged due to the hour of day being 23:00 (11 PM), which is unusual for this cardholder's typical activity. Additionally, the amount is significantly lower than the card's average transaction, indicating a potential anomaly. The merchant category of travel suggests this transaction is outside the usual spending patterns, and the short time since the last transaction (10.1 minutes) indicates a possible unauthorized use of the card.",
+      "grounded": true,
+      "cited": [
+        "amt_vs_card_avg",
+        "category",
+        "hour",
+        "mins_since_prev_txn"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.299
+    },
+    {
+      "ts": "2020-08-08 23:39:21",
+      "is_fraud": 0,
+      "score": 0.0006,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "hour of day: 23:00 (11 PM)",
+        "cardholder age: 78 years",
+        "amount compared with this card's average: 0.1x",
+        "minutes since the card's previous transaction: 28.1 minutes"
+      ],
+      "given": [
+        "hour",
+        "age",
+        "amt_vs_card_avg",
+        "mins_since_prev_txn"
+      ],
+      "explanation": "The transaction was flagged due to the high amount compared with the card's average, the age of the cardholder, the unusual hour of day, and the short time since the previous transaction.",
+      "grounded": false,
+      "cited": [
+        "age",
+        "amt",
+        "amt_vs_card_avg",
+        "hour",
+        "mins_since_prev_txn"
+      ],
+      "off_list": [
+        "amt"
+      ],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 2.145
+    },
+    {
+      "ts": "2020-08-14 03:07:13",
+      "is_fraud": 0,
+      "score": 0.0108,
+      "facts": [
+        "model fraud probability: 1.1%",
+        "transaction amount: $996.32",
+        "hour of day: 03:00 (3 AM)",
+        "cardholder age: 37 years",
+        "amount compared with this card's average: 18.0x"
+      ],
+      "given": [
+        "amt",
+        "hour",
+        "age",
+        "amt_vs_card_avg"
+      ],
+      "explanation": "The transaction amount of $996.32 is significantly higher than the cardholder's average spending, which is 18.0 times higher. The hour of day, 03:00 (3 AM), is unusual for a cardholder, suggesting potential fraud. The cardholder's age of 37 is also noteworthy, as older individuals may be more likely to engage in fraudulent activities.",
+      "grounded": true,
+      "cited": [
+        "age",
+        "amt",
+        "amt_vs_card_avg",
+        "hour"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.177
+    },
+    {
+      "ts": "2020-08-18 12:44:01",
+      "is_fraud": 0,
+      "score": 0.0018,
+      "facts": [
+        "model fraud probability: 0.2%",
+        "transaction amount: $2,348.63",
+        "amount compared with this card's average: 43.0x",
+        "merchant category: online shopping",
+        "distance from the cardholder's home to the merchant: 128 km"
+      ],
+      "given": [
+        "amt",
+        "amt_vs_card_avg",
+        "category",
+        "distance_km"
+      ],
+      "explanation": "The transaction amount of $2,348.63 is significantly higher than the cardholder's average spending, indicating potential fraud. The merchant category of online shopping suggests the transaction is likely for a large purchase, which is also a red flag. The distance from the cardholder's home to the merchant is 128 kilometers, which is a considerable distance, further increasing the suspicion of fraud.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "category",
+        "distance_km"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.115
+    },
+    {
+      "ts": "2020-08-18 14:26:32",
+      "is_fraud": 0,
+      "score": 0.0073,
+      "facts": [
+        "model fraud probability: 0.7%",
+        "transaction amount: $1,303.90",
+        "amount compared with this card's average: 19.7x",
+        "minutes since the card's previous transaction: 822.8 minutes",
+        "population of the cardholder's city: 1,760"
+      ],
+      "given": [
+        "amt",
+        "amt_vs_card_avg",
+        "mins_since_prev_txn",
+        "city_pop"
+      ],
+      "explanation": "The transaction amount of $1,303.90 is significantly higher than the card's average spending, which is 19.7 times higher. Additionally, the cardholder's account has been inactive for 822.8 minutes, indicating a prolonged period of no activity. The population of the cardholder's city is 1,760, which is a relatively small area, suggesting a higher likelihood of fraud in this region. The model's highest probability of fraud is 0.7%, further supporting the flagging of this transaction.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "city_pop"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.75,
+      "latency_s": 1.554
+    },
+    {
+      "ts": "2020-08-19 00:09:42",
+      "is_fraud": 0,
+      "score": 0.0008,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "hour of day: 00:00 (12 AM)",
+        "transaction amount: $18.25",
+        "minutes since the card's previous transaction: 0.8 minutes",
+        "amount compared with this card's average: 0.3x"
+      ],
+      "given": [
+        "hour",
+        "amt",
+        "mins_since_prev_txn",
+        "amt_vs_card_avg"
+      ],
+      "explanation": "The transaction was flagged due to the low amount ($18.25), the unusually high time of day (12 AM), the short time since the card's last transaction (0.8 minutes), and the amount being 30% of the card's average transaction.",
+      "grounded": false,
+      "cited": [
+        "amt_vs_card_avg",
+        "hour",
+        "mins_since_prev_txn"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [
+        30.0
+      ],
+      "coverage": 0.75,
+      "latency_s": 0.854
+    },
+    {
+      "ts": "2020-08-25 23:21:39",
+      "is_fraud": 0,
+      "score": 0.0017,
+      "facts": [
+        "model fraud probability: 0.2%",
+        "card spend in the previous 24 hours: $1,187.95",
+        "hour of day: 23:00 (11 PM)",
+        "card transactions in the previous 24 hours: 2",
+        "population of the cardholder's city: 241"
+      ],
+      "given": [
+        "amt_prev_24h",
+        "hour",
+        "txns_prev_24h",
+        "city_pop"
+      ],
+      "explanation": "The transaction was flagged due to the high value spent ($1,187.95), the unusual time of day (23:00), the high number of previous transactions (2), and the low population of the cardholder's city (241).",
+      "grounded": true,
+      "cited": [
+        "city_pop",
+        "hour"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.5,
+      "latency_s": 0.903
+    },
+    {
+      "ts": "2020-08-31 00:10:01",
+      "is_fraud": 0,
+      "score": 0.0008,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "transaction amount: $567.30",
+        "amount compared with this card's average: 9.2x",
+        "hour of day: 00:00 (12 AM)",
+        "card transactions in the previous 24 hours: 3"
+      ],
+      "given": [
+        "amt",
+        "amt_vs_card_avg",
+        "hour",
+        "txns_prev_24h"
+      ],
+      "explanation": "The transaction amount of $567.30 is significantly higher than the card's average transaction amount of $61.80, indicating a potential for fraud. Additionally, the transaction occurred at 12 AM, which is unusual for cardholders, suggesting a possible attempt to commit fraud during off-hours. The fact that the card has made 3 transactions in the past 24 hours, including this one, further supports the suspicion of fraud.",
+      "grounded": false,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "hour",
+        "txns_prev_24h"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [
+        61.8
+      ],
+      "coverage": 1.0,
+      "latency_s": 1.27
+    },
+    {
+      "ts": "2020-08-31 19:45:40",
+      "is_fraud": 0,
+      "score": 0.013,
+      "facts": [
+        "model fraud probability: 1.3%",
+        "transaction amount: $685.03",
+        "amount compared with this card's average: 9.5x",
+        "population of the cardholder's city: 267",
+        "cardholder age: 16 years"
+      ],
+      "given": [
+        "amt",
+        "amt_vs_card_avg",
+        "city_pop",
+        "age"
+      ],
+      "explanation": "The transaction amount of $685.03 is significantly higher than the cardholder's average spending, indicating potential fraud. The population of the cardholder's city is 267, suggesting a higher risk of fraud due to the cardholder's frequent transactions in a small area. The cardholder's age of 16 is also a red flag, as young individuals are more likely to engage in fraudulent activities. The model's fraud probability of 1.3% further supports the suspicion of fraud.",
+      "grounded": true,
+      "cited": [
+        "age",
+        "amt",
+        "amt_vs_card_avg",
+        "city_pop"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.414
+    },
+    {
+      "ts": "2020-09-04 23:56:37",
+      "is_fraud": 0,
+      "score": 0.0241,
+      "facts": [
+        "model fraud probability: 2.4%",
+        "transaction amount: $246.76",
+        "hour of day: 23:00 (11 PM)",
+        "merchant category: home goods",
+        "minutes since the card's previous transaction: 1,775.9 minutes"
+      ],
+      "given": [
+        "amt",
+        "hour",
+        "category",
+        "mins_since_prev_txn"
+      ],
+      "explanation": "The transaction amount of $246.76 is significantly higher than the average, suggesting potential fraud. The hour of day at 23:00 (11 PM) is unusual, indicating a potential time of day for fraud. The merchant category of home goods is not typically associated with high-value transactions, which could indicate a fraudulent activity. Additionally, the minutes since the card's previous transaction of 1,775.9 minutes is unusually high, suggesting a potential fraud attempt.",
+      "grounded": false,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "category",
+        "hour",
+        "mins_since_prev_txn"
+      ],
+      "off_list": [
+        "amt_vs_card_avg"
+      ],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.398
+    },
+    {
+      "ts": "2020-09-06 02:48:17",
+      "is_fraud": 0,
+      "score": 0.0019,
+      "facts": [
+        "model fraud probability: 0.2%",
+        "transaction amount: $7.96",
+        "hour of day: 02:00 (2 AM)",
+        "merchant category: miscellaneous in-store",
+        "amount compared with this card's average: 0.1x"
+      ],
+      "given": [
+        "amt",
+        "hour",
+        "category",
+        "amt_vs_card_avg"
+      ],
+      "explanation": "The transaction amount of $7.96 is significantly lower than the cardholder's usual spending, indicating potential fraud. The hour of day at 02:00 (2 AM) is unusual for the cardholder, suggesting possible fraud. The merchant category of miscellaneous in-store transactions is not typically associated with the cardholder's usual spending patterns, indicating potential fraud. The amount compared with this card's average is 0.1x, which is below the expected spending level, further supporting the suspicion of fraud.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "category",
+        "hour"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.674
+    },
+    {
+      "ts": "2020-09-08 23:50:48",
+      "is_fraud": 1,
+      "score": 0.9998,
+      "facts": [
+        "model fraud probability: 100.0%",
+        "transaction amount: $872.35",
+        "card spend in the previous 24 hours: $4,896.25",
+        "hour of day: 23:00 (11 PM)",
+        "cardholder age: 56 years"
+      ],
+      "given": [
+        "amt",
+        "amt_prev_24h",
+        "hour",
+        "age"
+      ],
+      "explanation": "The transaction amount of $872.35 is significantly lower than the cardholder's usual spending habits, which are reflected in the previous 24-hour total of $4,896.25. The hour of day, 23:00 (11 PM), is typically associated with higher spending due to late-night activities. The cardholder's age of 56 years is not a reason for the flagging.",
+      "grounded": false,
+      "cited": [
+        "age",
+        "amt",
+        "amt_prev_24h",
+        "amt_vs_card_avg",
+        "hour"
+      ],
+      "off_list": [
+        "amt_vs_card_avg"
+      ],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.324
+    },
+    {
+      "ts": "2020-09-28 00:15:37",
+      "is_fraud": 1,
+      "score": 0.9982,
+      "facts": [
+        "model fraud probability: 99.8%",
+        "merchant category: gas and transport",
+        "transaction amount: $8.92",
+        "card spend in the previous 24 hours: $3,587.62",
+        "hour of day: 00:00 (12 AM)"
+      ],
+      "given": [
+        "category",
+        "amt",
+        "amt_prev_24h",
+        "hour"
+      ],
+      "explanation": "The transaction was flagged due to the low value ($8.92), the high model fraud probability (99.8%), the merchant category (gas and transport), and the high card spend in the previous 24 hours ($3,587.62). The unusual time of day (12 AM) also contributed to the alert.",
+      "grounded": true,
+      "cited": [
+        "amt_prev_24h",
+        "category",
+        "hour"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.75,
+      "latency_s": 2.601
+    },
+    {
+      "ts": "2020-09-29 02:24:38",
+      "is_fraud": 1,
+      "score": 0.9994,
+      "facts": [
+        "model fraud probability: 99.9%",
+        "transaction amount: $305.73",
+        "merchant category: in-store grocery",
+        "card spend in the previous 24 hours: $1,998.60",
+        "amount compared with this card's average: 4.4x"
+      ],
+      "given": [
+        "amt",
+        "category",
+        "amt_prev_24h",
+        "amt_vs_card_avg"
+      ],
+      "explanation": "The transaction amount of $305.73 was flagged as suspicious due to its unusually high value compared to the card's average spend of $1,998.60, which is 4.4 times higher. The merchant category of in-store grocery was also flagged as potentially fraudulent, as it is not typically associated with high-value transactions. The model also flagged the transaction as potentially fraudulent due to the low probability of fraud (99.9%) and the high amount compared to the card's average spend.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "category"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.75,
+      "latency_s": 1.46
+    },
+    {
+      "ts": "2020-09-30 07:18:02",
+      "is_fraud": 1,
+      "score": 0.8527,
+      "facts": [
+        "model fraud probability: 85.3%",
+        "merchant category: gas and transport",
+        "transaction amount: $11.50",
+        "amount compared with this card's average: no earlier transaction on this card",
+        "card transactions in the previous 24 hours: 0"
+      ],
+      "given": [
+        "category",
+        "amt",
+        "amt_vs_card_avg",
+        "txns_prev_24h"
+      ],
+      "explanation": "The transaction was flagged due to the unusually low amount ($11.50), the merchant category being gas and transport, and the fact that there were no previous transactions on this card within the last 24 hours. The model also considered the card's average transaction amount, which was significantly lower than the $11.50, leading to the flag.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "category"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.75,
+      "latency_s": 1.066
+    },
+    {
+      "ts": "2020-10-15 01:19:31",
+      "is_fraud": 1,
+      "score": 0.9987,
+      "facts": [
+        "model fraud probability: 99.9%",
+        "transaction amount: $326.36",
+        "merchant category: in-store grocery",
+        "amount compared with this card's average: 5.2x",
+        "hour of day: 01:00 (1 AM)"
+      ],
+      "given": [
+        "amt",
+        "category",
+        "amt_vs_card_avg",
+        "hour"
+      ],
+      "explanation": "The transaction amount of $326.36 is significantly higher than the card's average spending, which is 5.2 times higher. The in-store grocery merchant category is also unusual, as it is not typically associated with high spending. The transaction occurred at 01:00 in the morning, which is an hour when people are less likely to make large purchases. The combination of these factors, along with the model's high fraud probability of 99.9%, strongly suggests that this transaction was flagged for potential fraud.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "category",
+        "hour"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.472
+    },
+    {
+      "ts": "2020-10-16 06:23:51",
+      "is_fraud": 0,
+      "score": 0.0016,
+      "facts": [
+        "model fraud probability: 0.2%",
+        "transaction amount: $706.47",
+        "card transactions in the previous 24 hours: 1",
+        "amount compared with this card's average: 10.1x",
+        "minutes since the card's previous transaction: 1,302.8 minutes"
+      ],
+      "given": [
+        "amt",
+        "txns_prev_24h",
+        "amt_vs_card_avg",
+        "mins_since_prev_txn"
+      ],
+      "explanation": "The transaction amount of $706.47 is significantly higher than the card's average spending of $73.14, indicating unusual spending behavior. Additionally, the card has not made any transactions in the past 24 hours, suggesting a potential fraud attempt. The model also considers the time since the last transaction, with 1,302.8 minutes, which is unusually long, further indicating a possible fraudulent activity.",
+      "grounded": false,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "mins_since_prev_txn",
+        "txns_prev_24h"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [
+        73.14
+      ],
+      "coverage": 1.0,
+      "latency_s": 1.239
+    },
+    {
+      "ts": "2020-10-26 13:24:12",
+      "is_fraud": 0,
+      "score": 0.001,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "transaction amount: $20.68",
+        "merchant category: kids and pets",
+        "minutes since the card's previous transaction: 858.5 minutes",
+        "card spend in the previous 24 hours: $440.86"
+      ],
+      "given": [
+        "amt",
+        "category",
+        "mins_since_prev_txn",
+        "amt_prev_24h"
+      ],
+      "explanation": "The transaction amount of $20.68 is unusually low, suggesting potential fraud. The merchant category of kids and pets is also unusual, indicating a high likelihood of fraud. The high minutes since the card's previous transaction (858.5 minutes) and the significant amount spent in the previous 24 hours ($440.86) further strengthen the suspicion of fraud.",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_prev_24h",
+        "category",
+        "mins_since_prev_txn"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.164
+    },
+    {
+      "ts": "2020-10-30 22:30:51",
+      "is_fraud": 0,
+      "score": 0.0038,
+      "facts": [
+        "model fraud probability: 0.4%",
+        "card spend in the previous 24 hours: $2,714.51",
+        "hour of day: 22:00 (10 PM)",
+        "card transactions in the previous 24 hours: 4",
+        "distance from the cardholder's home to the merchant: 141 km"
+      ],
+      "given": [
+        "amt_prev_24h",
+        "hour",
+        "txns_prev_24h",
+        "distance_km"
+      ],
+      "explanation": "The transaction was flagged due to the unusually high value spent in the previous 24 hours ($2,714.51), the time of day (22:00, 10 PM), the number of card transactions in the previous 24 hours (4), and the significant distance from the cardholder's home to the merchant (141 km). These factors combined indicate a potential for model fraud.",
+      "grounded": true,
+      "cited": [
+        "amt_prev_24h",
+        "distance_km",
+        "hour",
+        "txns_prev_24h"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.331
+    },
+    {
+      "ts": "2020-11-06 20:25:51",
+      "is_fraud": 0,
+      "score": 0.0009,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "card spend in the previous 24 hours: $433.77",
+        "card transactions in the previous 24 hours: 2",
+        "amount compared with this card's average: 0.1x",
+        "merchant category: kids and pets"
+      ],
+      "given": [
+        "amt_prev_24h",
+        "txns_prev_24h",
+        "amt_vs_card_avg",
+        "category"
+      ],
+      "explanation": "The transaction was flagged due to the unusually high amount compared with the card's average, the card's frequent use in the past 24 hours, and the merchant category indicating it was likely for a children's or pet-related purchase.",
+      "grounded": false,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "category"
+      ],
+      "off_list": [
+        "amt"
+      ],
+      "unsupported_numbers": [],
+      "coverage": 0.5,
+      "latency_s": 0.858
+    },
+    {
+      "ts": "2020-11-10 22:32:41",
+      "is_fraud": 0,
+      "score": 0.0223,
+      "facts": [
+        "model fraud probability: 2.2%",
+        "transaction amount: $236.94",
+        "hour of day: 22:00 (10 PM)",
+        "merchant category: home goods",
+        "minutes since the card's previous transaction: 4.3 minutes"
+      ],
+      "given": [
+        "amt",
+        "hour",
+        "category",
+        "mins_since_prev_txn"
+      ],
+      "explanation": "The transaction amount of $236.94 is significantly higher than the average for this time of day and location, suggesting potential fraud. The hour of day at 22:00 (10 PM) is unusual for this card, indicating possible unauthorized activity. The merchant category of home goods is not typically associated with high-value transactions, which raises suspicion. Additionally, the card has been inactive for 4.3 minutes since the last transaction, which could indicate a potential fraud attempt to cover up the previous transaction.",
+      "grounded": false,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "category",
+        "hour",
+        "mins_since_prev_txn"
+      ],
+      "off_list": [
+        "amt_vs_card_avg"
+      ],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.52
+    },
+    {
+      "ts": "2020-12-06 06:55:47",
+      "is_fraud": 0,
+      "score": 0.0006,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "transaction amount: $806.16",
+        "amount compared with this card's average: 13.3x",
+        "card transactions in the previous 24 hours: 1",
+        "population of the cardholder's city: 648"
+      ],
+      "given": [
+        "amt",
+        "amt_vs_card_avg",
+        "txns_prev_24h",
+        "city_pop"
+      ],
+      "explanation": "The transaction amount of $806.16 is significantly higher than the card's average transaction amount of $62.54, indicating a potential for fraud. Additionally, the cardholder's recent activity is minimal with only one transaction in the past 24 hours, suggesting a high likelihood of fraud. The population of the cardholder's city is relatively small, which could indicate a higher risk of fraud due to the cardholder's frequent transactions.",
+      "grounded": false,
+      "cited": [
+        "amt",
+        "amt_vs_card_avg",
+        "city_pop",
+        "txns_prev_24h"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [
+        62.54
+      ],
+      "coverage": 1.0,
+      "latency_s": 1.302
+    },
+    {
+      "ts": "2020-12-17 23:41:24",
+      "is_fraud": 0,
+      "score": 0.0359,
+      "facts": [
+        "model fraud probability: 3.6%",
+        "hour of day: 23:00 (11 PM)",
+        "transaction amount: $16.50",
+        "card transactions in the previous 24 hours: 3",
+        "card spend in the previous 24 hours: $340.46"
+      ],
+      "given": [
+        "hour",
+        "amt",
+        "txns_prev_24h",
+        "amt_prev_24h"
+      ],
+      "explanation": "The transaction was flagged due to the high amount ($16.50), the unusually low amount ($340.46 in the previous 24 hours), the high probability of fraud (3.6%), and the time of day (23:00, 11 PM).",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "hour"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.5,
+      "latency_s": 1.022
+    },
+    {
+      "ts": "2020-12-20 08:49:54",
+      "is_fraud": 0,
+      "score": 0.0014,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "transaction amount: $857.29",
+        "amount compared with this card's average: 14.3x",
+        "cardholder age: 28 years",
+        "distance from the cardholder's home to the merchant: 98 km"
+      ],
+      "given": [
+        "amt",
+        "amt_vs_card_avg",
+        "age",
+        "distance_km"
+      ],
+      "explanation": "The transaction amount of $857.29 is significantly higher than the cardholder's average spending, indicating potential fraud. The distance from the cardholder's home to the merchant is also unusually long, suggesting a high likelihood of fraud. The cardholder's age of 28 is not a strong indicator of fraud, but combined with the other factors, it increases the suspicion level.",
+      "grounded": true,
+      "cited": [
+        "age",
+        "amt",
+        "amt_vs_card_avg",
+        "distance_km"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.131
+    },
+    {
+      "ts": "2020-12-23 02:01:18",
+      "is_fraud": 0,
+      "score": 0.0007,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "card spend in the previous 24 hours: $1,688.09",
+        "transaction amount: $244.77",
+        "hour of day: 02:00 (2 AM)",
+        "minutes since the card's previous transaction: 59.3 minutes"
+      ],
+      "given": [
+        "amt_prev_24h",
+        "amt",
+        "hour",
+        "mins_since_prev_txn"
+      ],
+      "explanation": "The transaction was flagged due to the unusually low value ($244.77) in comparison to the previous 24-hour spend ($1,688.09), the high transaction amount ($244.77), occurring at 02:00 in the morning, and the short time elapsed since the card's last transaction (59.3 minutes).",
+      "grounded": true,
+      "cited": [
+        "amt",
+        "amt_prev_24h",
+        "hour",
+        "mins_since_prev_txn"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.184
+    },
+    {
+      "ts": "2020-12-27 01:56:19",
+      "is_fraud": 0,
+      "score": 0.0014,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "transaction amount: $588.47",
+        "amount compared with this card's average: 10.7x",
+        "hour of day: 01:00 (1 AM)",
+        "cardholder age: 43 years"
+      ],
+      "given": [
+        "amt",
+        "amt_vs_card_avg",
+        "hour",
+        "age"
+      ],
+      "explanation": "The transaction amount of $588.47 is significantly higher than the cardholder's average spending, indicating potential fraud. Additionally, the transaction occurred at 01:00 in the morning, which is unusual for the cardholder's usual spending pattern. The cardholder's age of 43 years is also noteworthy, as it suggests a higher risk of fraud. The model's fraud probability of 0.1% further supports the suspicion of fraudulent activity.",
+      "grounded": true,
+      "cited": [
+        "age",
+        "amt",
+        "amt_vs_card_avg",
+        "hour"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 1.0,
+      "latency_s": 1.301
+    },
+    {
+      "ts": "2020-12-27 02:21:13",
+      "is_fraud": 0,
+      "score": 0.0215,
+      "facts": [
+        "model fraud probability: 2.2%",
+        "card spend in the previous 24 hours: $1,957.26",
+        "transaction amount: $17.01",
+        "hour of day: 02:00 (2 AM)",
+        "merchant category: online grocery"
+      ],
+      "given": [
+        "amt_prev_24h",
+        "amt",
+        "hour",
+        "category"
+      ],
+      "explanation": "The transaction was flagged due to the unusually low amount ($17.01) compared to the high model fraud probability (2.2%). Additionally, the transaction occurred at 02:00 in the morning, which is not a typical time for spending, and the merchant category is online grocery, suggesting a high likelihood of fraud.",
+      "grounded": true,
+      "cited": [
+        "category",
+        "hour"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.5,
+      "latency_s": 1.023
+    },
+    {
+      "ts": "2020-12-29 18:17:07",
+      "is_fraud": 0,
+      "score": 0.0008,
+      "facts": [
+        "model fraud probability: 0.1%",
+        "card spend in the previous 24 hours: $1,179.40",
+        "merchant category: kids and pets",
+        "amount compared with this card's average: 0.1x",
+        "card transactions in the previous 24 hours: 4"
+      ],
+      "given": [
+        "amt_prev_24h",
+        "category",
+        "amt_vs_card_avg",
+        "txns_prev_24h"
+      ],
+      "explanation": "The transaction was flagged due to the unusually high amount spent ($1,179.40) in the previous 24 hours, which is 0.1 times the average amount spent on this card. Additionally, the transaction was made at a merchant category associated with kids and pets, indicating a specific type of spending that is not typically associated with the card's usual activity.",
+      "grounded": true,
+      "cited": [
+        "amt_vs_card_avg",
+        "category"
+      ],
+      "off_list": [],
+      "unsupported_numbers": [],
+      "coverage": 0.5,
+      "latency_s": 1.133
+    }
+  ]
+}
