@@ -93,7 +93,7 @@ def budget_tradeoff(
     )
     ax.set_xlim(0, max_per_day)
     ax.set_ylim(0, 1.02)
-    ax.legend(frameon=False, labelcolor=TEXT, loc="lower right")
+    ax.legend(frameon=False, labelcolor=TEXT, loc="center right")
     _save(fig, path)
 
 
