@@ -100,10 +100,14 @@ Card-history features use only earlier transactions on the same card. A test reb
 
 ## Run it
 
-Requires [uv](https://docs.astral.sh/uv/) and, for the explanations, [Ollama](https://ollama.com).
+### Requirements
+
+- [uv](https://docs.astral.sh/uv/) (installs Python 3.12 and every dependency), Git, and `make` (optional: each target is a single `uv run ...` line).
+- [Ollama](https://ollama.com), only for `make explain`.
+- macOS only: `brew install libomp` (LightGBM needs the OpenMP runtime).
 
 ```bash
-make install
+make install    # uv sync + pre-commit hooks
 ```
 
 Download the dataset from [Kaggle](https://www.kaggle.com/datasets/kartik2112/fraud-detection) (202 MB zip) and put `fraudTrain.csv` and `fraudTest.csv` in `data/raw/`. Or use Kaggle's own client:

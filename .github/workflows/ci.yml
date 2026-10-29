@@ -23,6 +23,11 @@ jobs:
         with:
           enable-cache: true
 
+      # LightGBM's macOS wheel links against Homebrew's OpenMP runtime.
+      - name: Install libomp (macOS)
+        if: runner.os == 'macOS'
+        run: brew install libomp
+
       - name: Install
         run: uv sync --all-groups --locked
 
