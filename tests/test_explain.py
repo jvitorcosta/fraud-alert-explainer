@@ -60,7 +60,7 @@ def test_build_prompt_lists_only_the_given_reasons() -> None:
     facts, prompt = build_prompt(0.973, reasons)
 
     assert facts == [
-        "model fraud score: 0.97",
+        "model fraud probability: 97.3%",
         "transaction amount: $1,077.69",
         "hour of day: 22:00 (10 PM)",
     ]

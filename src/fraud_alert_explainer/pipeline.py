@@ -175,6 +175,7 @@ def explain(models: list[str], n_alerts: int, base_url: str = DEFAULT_BASE_URL) 
                         "is_fraud": int(row[TARGET]),
                         "score": round(float(row["score"]), 4),
                         "facts": facts,
+                        "given": [r.feature for r in alert_reasons],
                         "explanation": text,
                         "grounded": result.grounded,
                         "cited": list(result.cited),

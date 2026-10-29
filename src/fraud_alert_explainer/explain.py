@@ -38,6 +38,8 @@ SYSTEM_PROMPT = (
     "Use ONLY the reasons listed. Do not mention any other attribute of the transaction or "
     "the cardholder, and do not write any number that is not in the list. "
     "Write 2 or 3 plain sentences saying why the transaction was flagged. "
+    "A reason can be an unusually low value as well as a high one, so do not call a value "
+    "high or low unless the list says so. "
     "Do not say it is fraud; the analyst decides."
 )
 
@@ -93,7 +95,7 @@ def top_reasons(
 
 def build_prompt(score: float, reasons: list[Reason]) -> tuple[list[str], str]:
     """Fact lines (also used by the grounding check) and the user message."""
-    facts = [f"model fraud score: {score:.2f}", *(fact_line(r) for r in reasons)]
+    facts = [f"model fraud probability: {score:.1%}", *(fact_line(r) for r in reasons)]
     bullets = "\n".join(f"- {fact}" for fact in facts[1:])
     user = (
         f"{facts[0].capitalize()}\n"

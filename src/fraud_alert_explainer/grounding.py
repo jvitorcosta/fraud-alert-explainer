@@ -16,6 +16,8 @@ _ALIASES: dict[str, str] = {
     "amt": (
         r"\b(transaction|purchase|charge|payment) amount\b|\bamount of \$"
         r"|\b(large|high|big|sizable|significant)(-| )(amount|value|purchase|transaction|charge)\b"
+        # "high amount spent in the previous 24 hours" is the 24-hour spend, not this amount.
+        r"(?! spent)"
     ),
     "amt_vs_card_avg": (
         r"\baverage\b|\b(usual|typical|normal)(ly)? (spend|spending|amount|purchase)"

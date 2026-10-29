@@ -70,7 +70,7 @@ def pr_curves(
 
 
 def budget_tradeoff(
-    curves: Mapping[str, pd.DataFrame], budget_per_day: float, path: Path, max_per_day: float = 200
+    curves: Mapping[str, pd.DataFrame], budget_per_day: float, path: Path, max_per_day: float = 100
 ) -> None:
     fig, ax = plt.subplots(figsize=(6.4, 4.2), facecolor=SURFACE)
     for color, (name, curve) in zip(SERIES, curves.items(), strict=False):
@@ -105,7 +105,7 @@ def shap_importance(shap_values: npt.NDArray[np.float64], names: list[str], path
     ax.barh(labels, mean_abs[order], color=SERIES[0], height=0.6)
     _style(
         ax,
-        "Which features drive the score (mean |SHAP|, test alerts)",
+        "Which features drive the score (mean |SHAP|, random test sample)",
         "Mean |SHAP value| (log-odds)",
         "",
     )

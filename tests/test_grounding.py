@@ -45,6 +45,13 @@ def test_cited_features_does_not_read_home_distance_as_a_category() -> None:
     assert cited_features("The merchant is far from the cardholder's home.") == {"distance_km"}
 
 
+def test_cited_features_reads_amount_spent_as_24h_spend() -> None:
+    # Regression: this was counted as the transaction amount in the first eval run.
+    text = "Flagged due to the high amount spent in the previous 24 hours ($1,187.95)."
+
+    assert cited_features(text) == {"amt_prev_24h"}
+
+
 def test_unsupported_numbers_allows_rounding_of_given_facts() -> None:
     assert unsupported_numbers("About $1,078, at 10 PM, score 0.97.", FACTS) == ()
 
