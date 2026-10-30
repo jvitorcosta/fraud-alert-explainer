@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier; do NOT edit manually.
-_commit: v0.3.0
+_commit: v0.4.0
 _src_path: gh:jvitorcosta/python-uv-claude-template
 author_email: ''
 author_name: João Vitor Pinheiro
@@ -7,8 +7,11 @@ description: LightGBM card-fraud model with SHAP-grounded, LLM-written alert exp
     on public simulated data.
 github_owner: jvitorcosta
 include_cli: false
+include_data_science: false
+include_example: true
 license: MIT
 package_name: fraud_alert_explainer
 project_name: fraud-alert-explainer
 project_slug: fraud-alert-explainer
+protect_project_files: true
 python_version: '3.12'
