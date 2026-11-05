@@ -1,14 +1,69 @@
 # fraud-alert-explainer
 
+[![CI](https://github.com/jvitorcosta/fraud-alert-explainer/actions/workflows/ci.yml/badge.svg)](https://github.com/jvitorcosta/fraud-alert-explainer/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 **If a fraud team can review N alerts a day, how much fraud does a model catch, and can a small local LLM explain each alert without making anything up?**
+
+**Status:** experiment
 
 This repo answers both on public data. A LightGBM model scores card transactions. SHAP picks the reasons behind each alert. A local LLM (Ollama) turns those reasons into a short note for the analyst, and a deterministic check verifies that the note cites only the reasons SHAP gave it.
 
-> **Data:** the [Sparkov simulated card-transaction dataset](https://www.kaggle.com/datasets/kartik2112/fraud-detection) (Kaggle, CC0): 1.85M transactions from 999 simulated cards, Jan 2019 to Dec 2020, 0.52% fraud. It contains no real customer or bank data. The setup mirrors work I've done professionally, but every number here comes from this public dataset and the code in this repo.
+> **Data:** the [Sparkov simulated card-transaction dataset](https://www.kaggle.com/datasets/kartik2112/fraud-detection) (Kaggle, CC0): 1.85M transactions from 999 simulated cards, Jan 2019 to Dec 2020, 0.52% fraud overall (0.38% in the test period below). It contains no real customer or bank data. The setup mirrors work I've done professionally, but every number here comes from this public dataset and the code in this repo.
+
+## Why I built it
+
+I wanted to answer one question end to end on public data: given a fixed daily review budget, how much fraud gets caught, and can a small local LLM explain each alert without inventing facts. It mirrors work I've done professionally, rebuilt here so every number is reproducible.
+
+## Quick start
+
+### Requirements
+
+- [uv](https://docs.astral.sh/uv/) (installs Python 3.12 and every dependency), Git, and `make` (optional: each target is a single `uv run ...` line).
+- [Ollama](https://ollama.com), only for `make explain`.
+- macOS only: `brew install libomp` (LightGBM needs the OpenMP runtime).
+
+```bash
+make install    # uv sync + pre-commit hooks
+```
+
+Download the dataset from [Kaggle](https://www.kaggle.com/datasets/kartik2112/fraud-detection) (202 MB zip) and put `fraudTrain.csv` and `fraudTest.csv` in `data/raw/`. Or use Kaggle's own client:
+
+```bash
+uv run --no-project --with kagglehub python -c "import kagglehub; print(kagglehub.dataset_download('kartik2112/fraud-detection'))"
+```
+
+Then:
+
+```bash
+make train      # features, both models, results/metrics.json, results/operating_points.md, charts (~5 min)
+ollama pull qwen2.5:1.5b
+ollama pull llama3.2:3b
+make explain    # explains 40 test alerts per model, writes results/explanations/ (~4 min)
+make check      # ruff, mypy --strict, pytest with coverage (no data or Ollama needed)
+```
+
+Without `make`, run the `uv run ...` line from the [Makefile](Makefile).
+
+## How it works
+
+```
+data.py      raw Kaggle CSVs → one time-ordered frame (names, street, job, merchant name dropped)
+features.py  amount, merchant category, hour, day, age, home-to-merchant distance, city size,
+             and card history: transactions in the last 1h/24h, spend in the last 24h, minutes since
+             the previous transaction, amount vs the card's average so far (all past-only)
+model.py     time split, LightGBM (early-stopped on validation PR-AUC), logistic baseline, metrics
+alerts.py    threshold → alerts/day, precision, fraud caught, fraud $ caught
+explain.py   TreeSHAP top reasons → fact lines → prompt
+llm.py       Ollama /api/chat client (temperature 0)
+grounding.py deterministic citation and number check, summary table
+pipeline.py  `train` and `explain` runs that write results/ and docs/img/
+```
+
+Card-history features use only earlier transactions on the same card. A test rebuilds the features on a truncated dataset and checks they match, so nothing leaks from the future. Gender is in the raw data but deliberately not a feature.
 
 ## Results
 
-Split by time: train Jan 2019 to Mar 2020, validation Apr to Jun 2020, test Jul to Dec 2020 (525,661 transactions, 2,012 fraud, about 11 a day). Both models get the same features. The headline metric is PR-AUC (average precision), because with 0.4% fraud even a weak model scores a high ROC-AUC.
+Split by time: train Jan 2019 to Mar 2020, validation Apr to Jun 2020, test Jul to Dec 2020 (525,661 transactions, 2,012 fraud, about 11 a day). Both models get the same features. The headline metric is PR-AUC (average precision), because with 0.38% fraud in this period even a weak model scores a high ROC-AUC.
 
 | Model | Test PR-AUC | Test ROC-AUC |
 |---|---:|---:|
@@ -81,53 +136,6 @@ Every explanation is in [`results/explanations/`](results/explanations). I read 
 
 40 alerts and one run per model is a small sample. The gaps between the two models are directional, not significant.
 
-## How it works
-
-```
-data.py      raw Kaggle CSVs → one time-ordered frame (names, street, job, merchant name dropped)
-features.py  amount, merchant category, hour, day, age, home-to-merchant distance, city size,
-             and card history: transactions in the last 1h/24h, spend in the last 24h, minutes since
-             the previous transaction, amount vs the card's average so far (all past-only)
-model.py     time split, LightGBM (early-stopped on validation PR-AUC), logistic baseline, metrics
-alerts.py    threshold → alerts/day, precision, fraud caught, fraud $ caught
-explain.py   TreeSHAP top reasons → fact lines → prompt
-llm.py       Ollama /api/chat client (temperature 0)
-grounding.py deterministic citation and number check, summary table
-pipeline.py  `train` and `explain` runs that write results/ and docs/img/
-```
-
-Card-history features use only earlier transactions on the same card. A test rebuilds the features on a truncated dataset and checks they match, so nothing leaks from the future. Gender is in the raw data but deliberately not a feature.
-
-## Run it
-
-### Requirements
-
-- [uv](https://docs.astral.sh/uv/) (installs Python 3.12 and every dependency), Git, and `make` (optional: each target is a single `uv run ...` line).
-- [Ollama](https://ollama.com), only for `make explain`.
-- macOS only: `brew install libomp` (LightGBM needs the OpenMP runtime).
-
-```bash
-make install    # uv sync + pre-commit hooks
-```
-
-Download the dataset from [Kaggle](https://www.kaggle.com/datasets/kartik2112/fraud-detection) (202 MB zip) and put `fraudTrain.csv` and `fraudTest.csv` in `data/raw/`. Or use Kaggle's own client:
-
-```bash
-uv run --no-project --with kagglehub python -c "import kagglehub; print(kagglehub.dataset_download('kartik2112/fraud-detection'))"
-```
-
-Then:
-
-```bash
-make train      # features, both models, results/metrics.json, results/operating_points.md, charts (~5 min)
-ollama pull qwen2.5:1.5b
-ollama pull llama3.2:3b
-make explain    # explains 40 test alerts per model, writes results/explanations/ (~4 min)
-make check      # ruff, mypy --strict, pytest with coverage (no data or Ollama needed)
-```
-
-Without `make`, run the `uv run ...` line from the [Makefile](Makefile).
-
 ## What I'd do differently
 
 - **Use harder data.** Sparkov's fraud is separable by hour and amount alone. I'd repeat this on IEEE-CIS or a dataset with chargeback delays, where labels arrive weeks late and the split has to account for that.
@@ -139,4 +147,4 @@ Without `make`, run the `uv run ...` line from the [Makefile](Makefile).
 
 ## License
 
-MIT for the code. The dataset is CC0 and is not redistributed here.
+MIT for the code, see [LICENSE](LICENSE). The dataset is CC0 and is not redistributed here.
